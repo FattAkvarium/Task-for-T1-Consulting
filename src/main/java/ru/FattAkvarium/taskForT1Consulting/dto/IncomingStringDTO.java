@@ -6,7 +6,7 @@ import jakarta.validation.constraints.Size;
 public class IncomingStringDTO {
 
     @NotEmpty(message = "Incoming string should not be empty!")
-    @Size(min = 1, max = 1000, message = "Incoming string should be between 1 and 1000 characters!")
+    @Size(min = 2, max = 1000, message = "Incoming string should be between 2 and 1000 characters!")
     private String incomingString;
 
     public String getIncomingString() {
