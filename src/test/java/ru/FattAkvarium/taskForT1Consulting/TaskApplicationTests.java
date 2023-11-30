@@ -23,7 +23,7 @@ class TaskApplicationTests {
 
         incomingStringService.save(incomingString);
 
-        final Map<String, Long> myResult = incomingStringService.returnFillAndSortedMap();
+        final Map<String, Long> myResult = incomingStringService.returnSortedMap();
         final Map<String, Long> expectation = new LinkedHashMap<>(){
             {
                 put("a", 2L);

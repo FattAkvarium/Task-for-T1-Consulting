@@ -47,7 +47,7 @@ public class IncomingStringController {
 
         incomingStringService.save(convertToIncomingString(incomingStringDTO));
 
-        final Map<String, Long> mapForRequest = incomingStringService.returnFillAndSortedMap();
+        final Map<String, Long> mapForRequest = incomingStringService.returnSortedMap();
         return mapForRequest != null && !mapForRequest.isEmpty() ? new ResponseEntity<>(mapForRequest, HttpStatus.OK)
                                             : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }

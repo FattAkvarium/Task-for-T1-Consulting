@@ -16,26 +16,28 @@ public class IncomingStringService implements StringService {
         INCOMING_STRING_LIST.add(incomingString);
     }
 
-    public Map<String, Long> returnFillAndSortedMap() {
-        Map<String, Long> mapOfSymbolsAndSymbolsCount = Arrays.stream(INCOMING_STRING_LIST
+    public Map<String, Long> fillMap() {
+        return Arrays.stream(INCOMING_STRING_LIST
                         .get(INCOMING_STRING_LIST.size() - 1)
                         .getIncomingString()
                         .split(""))
-                        .collect(Collectors.groupingBy(symbol -> symbol, Collectors.counting()));
-        return sortedMap(mapOfSymbolsAndSymbolsCount);
+                .collect(Collectors.groupingBy(symbol -> symbol, Collectors.counting()));
     }
 
-    public LinkedHashMap<String, Long> sortedMap(Map<String, Long> mapForSorting) {
-        LinkedHashMap<String, Long> sortedMap = mapForSorting.entrySet()
+    public LinkedHashMap<String, Long> sortedMap(Map<String, Long> unSortedMap) {
+        return unSortedMap.entrySet()
                 .stream()
-                .sorted(Comparator.comparingLong(count -> count.getValue()))
+                .sorted(Comparator.comparingLong(count -> -count.getValue()))
                 .collect(Collectors.toMap(
                         Map.Entry::getKey,
                         Map.Entry::getValue,
                         (a, b) -> {throw new AssertionError();},
                         LinkedHashMap::new
                 ));
-        return sortedMap;
+    }
+
+    public Map<String, Long> returnSortedMap() {
+        return sortedMap(fillMap());
     }
 
 }
